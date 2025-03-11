@@ -1,20 +1,14 @@
 package com.project.clothing_store_backend.service.auth.impl;
 
-import com.project.clothing_store_backend.dto.request_dto.auth.RequestApplicationUserLoginDto;
 import com.project.clothing_store_backend.dto.request_dto.auth.RequestUserDto;
-import com.project.clothing_store_backend.dto.request_dto.auth.RequestUserPasswordResetDto;
-import com.project.clothing_store_backend.dto.response_dto.auth.ResponseApplicationUserDto;
-import com.project.clothing_store_backend.dto.response_dto.auth.auth_paginated_dto.PaginatedUserResponseDto;
 import com.project.clothing_store_backend.entity.ApplicationUser;
 import com.project.clothing_store_backend.entity.UserRole;
-import com.project.clothing_store_backend.exception.DuplicateEntryException;
 import com.project.clothing_store_backend.exception.EntryNotFoundException;
 import com.project.clothing_store_backend.repo.auth.ApplicationUserRepo;
 import com.project.clothing_store_backend.repo.auth.ApplicationUserRoleRepo;
 import com.project.clothing_store_backend.security.SupportSpringApplicationUser;
 import com.project.clothing_store_backend.service.auth.ApplicationUserService;
 import com.project.clothing_store_backend.util.OtpGenerator;
-import com.project.clothing_store_backend.util.StrongPasswordGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,8 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.crypto.SecretKey;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.*;
 
 import static com.project.clothing_store_backend.security.ApplicationUserRole.*;
@@ -35,7 +27,6 @@ import static com.project.clothing_store_backend.security.ApplicationUserRole.*;
 @RequiredArgsConstructor
 public class ApplicationUserServiceImpl implements ApplicationUserService {
     private final ApplicationUserRepo applicationUserRepo;
-    private final StrongPasswordGenerator strongPasswordGenerator;
     private final ApplicationUserRoleRepo applicationUserRoleRepo;
     private final PasswordEncoder passwordEncoder;
     private final SecretKey secretKey;
