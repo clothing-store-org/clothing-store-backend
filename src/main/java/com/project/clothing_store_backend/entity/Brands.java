@@ -10,8 +10,8 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@Entity(name = "brand")
-public class Brand {
+@Entity(name = "brands")
+public class Brands {
     @Id
     @Column(name = "property_id", nullable = false, length = 80)
     private String property_id;
