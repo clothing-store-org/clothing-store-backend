@@ -1,8 +1,6 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -31,4 +29,9 @@ public class CartItem {
     private String cart_id;
     @Column(name = "product_id", nullable = false, length = 80)
     private String product_id;
+    @ManyToOne
+    @JoinColumn(name = "cart",nullable = false)
+    private Cart cart;
+    @OneToOne(mappedBy = "cartItem",fetch = FetchType.LAZY)
+    private Product product;
 }

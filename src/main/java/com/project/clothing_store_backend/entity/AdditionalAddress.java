@@ -1,8 +1,6 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -21,8 +19,10 @@ public class AdditionalAddress {
     private String address_line_2;
     @Column(name = "postal_code", nullable = false, length = 20)
     private String postal_code;
-    @Column(name = "city_id", nullable = false, length = 80)
-    private String city_id;
-    @Column(name = "user_id", nullable = false, length = 80)
-    private String user_id;
+    @ManyToOne
+    @JoinColumn(name = "city",nullable = false)
+    private City city;
+    @ManyToOne
+    @JoinColumn(name = "user",nullable = false)
+    private ApplicationUser user;
 }

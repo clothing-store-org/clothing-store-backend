@@ -1,11 +1,10 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,4 +28,7 @@ public class Rating {
     private String rate_5;
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
+    @ManyToOne
+    @JoinColumn(name = "review",nullable = false)
+    private Review review;
 }

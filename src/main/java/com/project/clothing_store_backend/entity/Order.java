@@ -1,11 +1,10 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,8 +22,17 @@ public class Order {
     private String address_id;
     @Column(name = "order_status_id", nullable = false, length = 80)
     private String order_status_id;
-    @Column(name = "payment", nullable = false)
-    private double payment;
     @Column(name = "payment_method_id", nullable = false, length = 80)
     private String payment_method_id;
+    @ManyToOne
+    @JoinColumn(name = "address", nullable = false)
+    private Address address;
+    @OneToMany(mappedBy = "order",fetch =FetchType.LAZY )
+    private List<Item> items;
+    @OneToOne
+    @JoinColumn(name = "order-tracking",nullable = false)
+    private OrderTracking orderTracking;
+    @OneToOne
+    @JoinColumn(name = "payment",nullable = false)
+    private Payment payment;
 }

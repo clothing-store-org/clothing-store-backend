@@ -1,11 +1,10 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +20,9 @@ public class WishList {
     private Date createdAt;
     @Column(name = "user_id", nullable = false, length = 80)
     private String user_id;
+    @ManyToOne
+    @JoinColumn(name = "user",nullable = false)
+    private ApplicationUser user;
+    @OneToMany(mappedBy = "wish-list",fetch = FetchType.LAZY)
+    private List<WishListItem> wishListItems;
 }

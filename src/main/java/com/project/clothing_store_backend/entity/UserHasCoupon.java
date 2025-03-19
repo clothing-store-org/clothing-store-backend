@@ -1,8 +1,6 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -13,8 +11,12 @@ import lombok.*;
 @Entity(name = "user_has_coupon")
 public class UserHasCoupon {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
-    private String user_id;
-    @Column(name = "coupon_id", nullable = false, length = 80)
-    private String coupon_id;
+    private String property_id;
+    @ManyToOne
+    @JoinColumn(name = "user",nullable = false)
+    private ApplicationUser user;
+    @ManyToOne
+    @JoinColumn(name = "coupon",nullable = false)
+    private Coupon coupon;
+
 }

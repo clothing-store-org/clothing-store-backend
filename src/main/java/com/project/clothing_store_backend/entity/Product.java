@@ -1,11 +1,10 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,4 +30,21 @@ public class Product {
     private String brand_id;
     @Column(name = "discount_id", nullable = false, length = 80)
     private String discount_id;
+    @ManyToOne
+    @JoinColumn(name = "brand",nullable = false)
+    private Brand brand;
+    @OneToOne
+    @JoinColumn(name = "cartItem",nullable = false)
+    private CartItem cartItem;
+    @ManyToOne
+    @JoinColumn(name = "discount",nullable = false)
+    private Discount discount;
+    @OneToMany(mappedBy = "Product",fetch = FetchType.LAZY)
+    private List<Item> items;
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    private List<KeyWord> keyWords;
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    private List<Review> reviews;
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    private List<WishListItem> wishListItems;
 }

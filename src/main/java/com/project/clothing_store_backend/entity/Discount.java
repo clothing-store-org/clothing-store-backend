@@ -1,11 +1,10 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +24,6 @@ public class Discount {
     private Date end_date;
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
+    @OneToMany(mappedBy = "discount",fetch = FetchType.LAZY)
+    private List<Product> products;
 }

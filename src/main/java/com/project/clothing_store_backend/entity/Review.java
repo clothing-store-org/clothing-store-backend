@@ -1,11 +1,12 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.locks.ReadWriteLock;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +26,9 @@ public class Review {
     private String rating_id;
     @Column(name = "product_id", nullable = false, length = 80)
     private String product_id;
+    @ManyToOne
+    @JoinColumn(name = "product",nullable = false)
+    private Product product;
+    @OneToMany(mappedBy = "review",fetch = FetchType.LAZY)
+    private List<Rating> ratings;
 }

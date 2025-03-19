@@ -1,9 +1,9 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 @Builder
 @Entity(name = "brands")
-public class Brands {
+public class Brand {
     @Id
     @Column(name = "property_id", nullable = false, length = 80)
     private String property_id;
@@ -19,5 +19,10 @@ public class Brands {
     private String brand_name;
     @Column(name = "category_id", nullable = false, length = 80)
     private String category_id;
+    @ManyToOne
+    @JoinColumn(name = "category",nullable = false)
+    private Category category;
+    @OneToMany(mappedBy = "brand",fetch = FetchType.LAZY)
+    private List<Product> products;
 
 }
