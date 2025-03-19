@@ -28,7 +28,7 @@ public class Rating {
     private String rate_5;
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "review",nullable = false)
     private Review review;
 }

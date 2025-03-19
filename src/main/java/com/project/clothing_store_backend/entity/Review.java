@@ -29,6 +29,6 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "product",nullable = false)
     private Product product;
-    @OneToMany(mappedBy = "review",fetch = FetchType.LAZY)
-    private List<Rating> ratings;
+    @OneToOne(mappedBy = "review",fetch = FetchType.LAZY)
+    private Rating rating;
 }
