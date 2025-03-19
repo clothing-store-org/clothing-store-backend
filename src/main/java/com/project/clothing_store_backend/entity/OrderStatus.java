@@ -1,9 +1,9 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +17,6 @@ public class OrderStatus {
     private String property_id;
     @Column(name = "type", nullable = false)
     private String type;
+    @OneToMany(mappedBy = "order-status",fetch = FetchType.LAZY)
+    private List<OrderTracking> orderTracking;
 }

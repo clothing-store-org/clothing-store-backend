@@ -1,9 +1,9 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +19,9 @@ public class District {
     private String district_name;
     @Column(name = "province_id", nullable = false, length = 80)
     private String province_id;
+    @OneToMany(mappedBy = "city",fetch = FetchType.LAZY)
+    private List<District> districts;
+    @ManyToOne
+    @JoinColumn(name = "province",nullable = false)
+    private Province province;
 }

@@ -1,9 +1,9 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +23,12 @@ public class Address {
     private int postal_code;
     @Column(name = "delivery_fee", nullable = false)
     private double delivery_fee;
-    @Column(name = "city_id", nullable = false, length = 80)
-    private String city_id;
+    @ManyToOne
+    @JoinColumn(name = "city",nullable = false)
+    private City city;
+    @OneToMany(mappedBy = "address",fetch = FetchType.LAZY)
+    private List<ApplicationUser> users;
+    @OneToMany(mappedBy = "address",fetch = FetchType.LAZY)
+    private List<Order> orders;
+
 }

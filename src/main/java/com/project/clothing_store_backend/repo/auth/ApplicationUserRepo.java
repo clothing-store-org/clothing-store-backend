@@ -5,9 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
+@Repository
 public interface ApplicationUserRepo extends JpaRepository<ApplicationUser,String> {
     @Query(value = "SELECT * FROM application_user WHERE username=?1", nativeQuery = true)
     Optional<ApplicationUser> findByUsername(String username);

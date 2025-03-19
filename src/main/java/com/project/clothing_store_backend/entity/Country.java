@@ -1,8 +1,6 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -17,4 +15,7 @@ public class Country {
     private String property_id;
     @Column(name = "country_name", nullable = false, length = 255)
     private String country_name;
+    @ManyToOne
+    @JoinColumn(name = "province",nullable = false)
+    private Province province;
 }

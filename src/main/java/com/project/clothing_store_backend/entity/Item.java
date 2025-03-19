@@ -1,8 +1,6 @@
 package com.project.clothing_store_backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -31,4 +29,10 @@ public class Item {
     private String product_id;
     @Column(name = "order_id", nullable = false, length = 80)
     private String order_id;
+    @ManyToOne
+    @JoinColumn(name = "order",nullable = false)
+    private Order order;
+    @ManyToOne
+    @JoinColumn(name = "product",nullable = false)
+    private Product product;
 }

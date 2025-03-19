@@ -1,9 +1,8 @@
 package com.project.clothing_store_backend.repo;
 
-import com.project.clothing_store_backend.entity.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartItemRepo extends JpaRepository<CartItem, String> {
+public interface Payment extends JpaRepository<Payment,String> {
 }

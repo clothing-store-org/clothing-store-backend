@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "application_user")
@@ -47,4 +48,16 @@ public class ApplicationUser {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRole> roles;
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<AdditionalAddress> additionalAddresses;
+    @OneToMany(mappedBy = "coupon",fetch = FetchType.LAZY)
+    private List<UserHasCoupon> user;
+    @ManyToOne
+    @JoinColumn(name = "address",nullable = false)
+    private Address address;
+    @OneToOne
+    @JoinColumn(name = "cart",nullable = false)
+    private Cart cart;
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<WishList> wishLists;
 }
