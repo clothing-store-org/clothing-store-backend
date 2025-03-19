@@ -13,15 +13,18 @@ import java.util.List;
 @Entity(name = "district")
 public class District {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
+    @Column(name = "property_id", nullable = false)
     private String property_id;
+
     @Column(name = "district_name", nullable = false, length = 255)
     private String district_name;
-    @Column(name = "province_id", nullable = false, length = 80)
-    private String province_id;
-    @OneToMany(mappedBy = "city",fetch = FetchType.LAZY)
-    private List<District> districts;
+
+//    new
+
     @ManyToOne
-    @JoinColumn(name = "province",nullable = false)
+    @JoinColumn(name = "province_id",nullable = false)
     private Province province;
+
+    @OneToMany(mappedBy = "district",fetch = FetchType.LAZY)
+    private List<City> cities;
 }

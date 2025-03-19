@@ -3,6 +3,7 @@ package com.project.clothing_store_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,21 +15,30 @@ import java.util.List;
 @Entity(name = "rating")
 public class Rating {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
+    @Column(name = "property_id", nullable = false,unique = true)
     private String property_id;
-    @Column(name = "rate_1", nullable = false, length = 80)
-    private String rate_1;
-    @Column(name = "rate_2", nullable = false, length = 80)
-    private String rate_2;
-    @Column(name = "rate_3", nullable = false, length = 80)
-    private String rate_3;
-    @Column(name = "rate_4", nullable = false, length = 80)
-    private String rate_4;
-    @Column(name = "rate_5", nullable = false, length = 80)
-    private String rate_5;
-    @Column(name = "createdAt", nullable = false)
-    private Date createdAt;
-    @OneToOne
-    @JoinColumn(name = "review",nullable = false)
+
+    @Column(name = "star_1", nullable = false)
+    private int star_1;
+
+    @Column(name = "star_2", nullable = false)
+    private int star_2;
+
+    @Column(name = "star_3", nullable = false)
+    private int star_3;
+
+    @Column(name = "star_4", nullable = false)
+    private int star_4;
+
+    @Column(name = "star_5", nullable = false)
+    private int star_5;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+//    new
+
+    @OneToOne(mappedBy = "rating",fetch = FetchType.LAZY)
     private Review review;
+
 }

@@ -3,6 +3,7 @@ package com.project.clothing_store_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,37 +15,46 @@ import java.util.List;
 @Entity(name = "product")
 public class Product {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
-    private String property_id;
+    @Column(name = "property_id", nullable = false,unique = true)
+    private String propertyId;
+
     @Column(name = "product_title", nullable = false, length = 255)
-    private String product_title;
+    private String productTitle;
+
     @Column(name = "product_description", nullable = false, length = 255)
-    private String product_description;
-    @Column(name = "unit_price", nullable = false)
-    private double unit_price;
-    @Column(name = "qty_on_hand", nullable = false, length = 80)
-    private int qty_on_hand;
-    @Column(name = "createdAt", nullable = false)
-    private Date createdAt;
-    @Column(name = "brand_id", nullable = false, length = 80)
-    private String brand_id;
-    @Column(name = "discount_id", nullable = false, length = 80)
-    private String discount_id;
+    private String productDescription;
+
+    @Column(name = "unit_price", nullable = false,scale = 2)
+    private double unitPrice;
+
+    @Column(name = "qty_on_hand", nullable = false)
+    private int qtyOnHand;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+//    new
+
     @ManyToOne
-    @JoinColumn(name = "brand",nullable = false)
+    @JoinColumn(name = "brand_id",nullable = false)
     private Brand brand;
-    @OneToOne
-    @JoinColumn(name = "cartItem",nullable = false)
-    private CartItem cartItem;
-    @ManyToOne
-    @JoinColumn(name = "discount",nullable = false)
-    private Discount discount;
-    @OneToMany(mappedBy = "Product",fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    private List<CartItem> cartItems;
+
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
     private List<Item> items;
+
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
     private List<KeyWord> keyWords;
+
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    private List<ProductHasDiscount> productHasDiscounts;
+
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
     private List<Review> reviews;
+
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
     private List<WishListItem> wishListItems;
+
 }

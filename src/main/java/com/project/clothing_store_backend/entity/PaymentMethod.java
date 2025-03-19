@@ -13,11 +13,13 @@ import java.util.List;
 @Entity(name = "payment_method")
 public class PaymentMethod {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
+    @Column(name = "property_id", nullable = false,unique = true)
     private String property_id;
-    @Column(name = "type", nullable = false, length = 80)
-    private String type;
-    @ManyToOne
-    @JoinColumn(name = "payment",nullable = false)
-    private Payment payment;
+
+    @Column(name = "payment_method", nullable = false, unique = true)
+    private String payment_method;
+
+    @OneToMany(mappedBy = "paymentMethod",fetch = FetchType.LAZY)
+    private List<Payment> payments;
+
 }

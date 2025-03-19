@@ -3,6 +3,7 @@ package com.project.clothing_store_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -13,15 +14,16 @@ import java.util.Date;
 @Entity(name = "key_word")
 public class KeyWord {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
+    @Column(name = "property_id", nullable = false, unique = true)
     private String property_id;
-    @Column(name = "createdAt", nullable = false)
-    private Date createdAt;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
     @Column(name = "key_words", nullable = false)
     private String key_words;
-    @Column(name = "product_id", nullable = false, length = 80)
-    private String product_id;
+
     @ManyToOne
-    @JoinColumn(name = "product",nullable = false)
+    @JoinColumn(name = "product_id",nullable = false)
     private Product product;
 }

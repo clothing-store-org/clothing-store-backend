@@ -3,6 +3,7 @@ package com.project.clothing_store_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -11,19 +12,25 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@Entity(name = "brand")
+@Entity(name = "discount")
 public class Discount {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
-    private String property_id;
-    @Column(name = "type", nullable = false, length = 80)
-    private String type;
+    @Column(name = "property_id", nullable = false)
+    private String propertyId;
+
     @Column(name = "discount_rate", nullable = false)
-    private double discount_rate;
+    private double discountRate;
+
     @Column(name = "end_date", nullable = false)
-    private Date end_date;
-    @Column(name = "createdAt", nullable = false)
-    private Date createdAt;
+    private LocalDateTime endDate;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "discount_type_id",nullable = false)
+    private DiscountType discountType;
+
     @OneToMany(mappedBy = "discount",fetch = FetchType.LAZY)
-    private List<Product> products;
+    private List<ProductHasDiscount> productHasDiscounts;
 }

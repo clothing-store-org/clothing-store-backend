@@ -13,10 +13,14 @@ import java.util.List;
 @Entity(name = "order_status")
 public class OrderStatus {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
+    @Column(name = "property_id", nullable = false, unique = true)
     private String property_id;
-    @Column(name = "type", nullable = false)
-    private String type;
-    @OneToMany(mappedBy = "order-status",fetch = FetchType.LAZY)
-    private List<OrderTracking> orderTracking;
+
+    @Column(name = "order_type", nullable = false,unique = true)
+    private String order_type;
+
+//    new
+
+    @OneToMany(mappedBy = "orderStatus",fetch = FetchType.LAZY)
+    private List<OrderTracking> orderTrackings;
 }

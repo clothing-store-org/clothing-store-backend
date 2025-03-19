@@ -3,6 +3,7 @@ package com.project.clothing_store_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,15 +15,16 @@ import java.util.List;
 @Entity(name = "wish_list")
 public class WishList {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
+    @Column(name = "property_id", nullable = false, unique = true)
     private String property_id;
-    @Column(name = "createdAt", nullable = false)
-    private Date createdAt;
-    @Column(name = "user_id", nullable = false, length = 80)
-    private String user_id;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
     @ManyToOne
-    @JoinColumn(name = "user",nullable = false)
+    @JoinColumn(name = "user_id",nullable = false)
     private ApplicationUser user;
-    @OneToMany(mappedBy = "wish-list",fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "wishList",fetch = FetchType.LAZY)
     private List<WishListItem> wishListItems;
 }
