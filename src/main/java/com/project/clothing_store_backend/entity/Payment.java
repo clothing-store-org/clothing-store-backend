@@ -3,6 +3,8 @@ package com.project.clothing_store_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,16 +16,23 @@ import java.util.List;
 @Entity(name = "payment")
 public class Payment {
     @Id
-    @Column(name = "property_id", nullable = false, length = 80)
+    @Column(name = "property_id", nullable = false, unique = true)
     private String property_id;
-    @Column(name = "payment_method_id", nullable = false, length = 80)
-    private String payment_method_id;
-    @Column(name = "order_id", nullable = false, length = 80)
-    private String order_id;
-    @Column(name = "createdAt", nullable = false, length = 80)
-    private Date createdAt;
-    @OneToOne(mappedBy = "payment",fetch = FetchType.LAZY)
+
+//    new
+
+    @ManyToOne
+    @JoinColumn(name = "payment_method_id",nullable = false)
+    private PaymentMethod paymentMethod;
+
+    @OneToOne
+    @JoinColumn(name = "order_id",nullable = false)
     private Order order;
-    @OneToMany(mappedBy = "payment",fetch = FetchType.LAZY)
-    private List<PaymentMethod> paymentMethods;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "delivery_info_id",nullable = false)
+    private DeliveryInfo deliveryInfo;
 }

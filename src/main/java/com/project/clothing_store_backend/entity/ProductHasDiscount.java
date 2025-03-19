@@ -3,22 +3,24 @@ package com.project.clothing_store_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
+@Table(name = "product_has_discount")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-@Entity(name = "user_has_coupon")
-public class UserHasCoupon {
+public class ProductHasDiscount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private ApplicationUser user;
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "coupon_id", nullable = false)
-    private Coupon coupon;
+    @JoinColumn(name = "discount_id", nullable = false)
+    private Discount discount;
 }

@@ -2,6 +2,7 @@ package com.project.clothing_store_backend.dto.request_dto.auth;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -15,6 +16,6 @@ public class RequestUserDto {
     private String contact;
     private String country;
     private String role;
-    private Date dob;
+    private LocalDateTime dob;
     private String gender;
 }

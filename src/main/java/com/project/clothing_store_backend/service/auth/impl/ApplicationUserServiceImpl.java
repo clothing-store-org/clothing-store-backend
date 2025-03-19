@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.crypto.SecretKey;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static com.project.clothing_store_backend.security.ApplicationUserRole.*;
@@ -100,7 +101,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
                         .baseCountry("Sri Lanka")
                         .contact("0767298181")
                         .fullName("Kasun Fernando")
-                        .dob(new Date())
+                        .dob(LocalDateTime.now())
                         .gender("MALE")
                         .roles(selectedRoles)
                         .isAccountNonExpired(true)
