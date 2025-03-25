@@ -44,6 +44,7 @@ public class OrderController {
             @RequestParam int page,
             @RequestParam int size
     ){
+        System.out.println(page+size);
         PaginatedOrderDto all = orderService.getAll(searchText, page, size);
         return new ResponseEntity<>(
                 new StandardResponse(200,"Order list!..",all),

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderRepo extends JpaRepository<Order, String> {
-    @Query(value = "SELECT * FROM orders WHERE netTotal LIKE %?1%, address LIKE %?1% ",nativeQuery = true)
+    @Query(value = "SELECT * FROM orders WHERE net_total LIKE %?1% AND property_id LIKE %?1% ",nativeQuery = true)
     public Page<Order> findAllWithSearchText(String searchText, Pageable pageable);
-    @Query(value = "SELECT COUNT(*) FROM orders WHERE netTotal LIKE %?1%,address LIKE %?1% ",nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM orders WHERE net_total LIKE %?1% AND property_id LIKE %?1% ",nativeQuery = true)
     public long countAllWithSearchText(String searchText);
 }
